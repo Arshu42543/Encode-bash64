@@ -1,119 +1,95 @@
-#------------- IMPORT ------------#
-from os import system as c
-import marshal
-import base64
-import zlib
+# coding:utf8
+# Decompiled by HTR-TECH | TAHMID RAYAT
+# Github : https://github.com/htr-tech
+#---------------------------------------
+# Auto Dis Parser 2.2.0
+# Source File : patched.pyc
+# Bytecode Version : 2.7
+#---------------------------------------
+import sys, os, time
+from zlib import compress
+B = '\x1b[34;1m'
+R = '\x1b[31;1m'
+G = '\x1b[32;1m'
+W = '\x1b[0m'
+Y = '\x1b[33;1m'
+counter = 0
+def banner():
+    os.system('clear')
+    print """ \x1b[31;5m  _____                        ______ _ _
+ | ____|_ __  _ __  _   _     |__  / (_) |__
+ |  _| | '_ \| '_ \| | | |_____ / /| | | '_ \\
+\x1b[39;5m | |___| | | | |_) | |_| |_____/ /_| | | |_) |
+ |_____|_| |_| .__/ \__, |    /____|_|_|_.__/
+             |_|    |___/
+╔════════════════════════════════════════════╗
+    \x1b[31;5mAuthor : \x1b[39;3mFebry [ xNot_Found ]\x1b[0;37m
+    \x1b[31;5mGithub : \x1b[39;3mhttps://github.com/hatakecnk\x1b[0;37m\x1b[39;5m
+╚════════════════════════════════════════════╝"""
 try:
-    from Cython.Build.BuildExecutable import build as execute
+    banner()
+    file = raw_input('\033[0;37m┌─[\033[31;1m Input Your File Path (\x1b[39;5m/sdcard/ex.py\x1b[31;1m) \033[0;37m]\n\033[0;37m└─[\033[31;1m$\033[0;37m]> \033[36;1m')
+    count = int(raw_input('\033[0;37m┌─[\033[31;1m Count Encrypt (\x1b[39;5mmax 400\x1b[31;1m) \033[0;37m]\n\033[0;37m└─[\033[31;1m$\033[0;37m]> \033[36;1m'))
+except IndexError:
+    print R + '\n[' + W + '!' + R + '] ' + W + 'there is an error'
+    sys.exit()
+except KeyboardInterrupt:
+    print R + '\n[' + W + '!' + R + '] ' + W + 'ctrl+c detected'
+    print R + '[' + W + '!' + R + '] ' + W + 'trying to exit'
+    sys.exit()
+except EOFError:
+	print R + '\n\n[' + W + '!' + R + '] ' + W + 'ctrl+d detected'
+	print R + '[' + W + '!' + R + '] ' + W + 'trying to exit'
+	sys.exit()
+except ValueError:
+	print R + '\n[' + W + '!' + R + '] ' + W + 'input count!'
+	print R + '[' + W + '!' + R + '] ' + W + 'trying to exit'
+	sys.exit()
 except:
-    c('pip install cython >/dev/null')
-#---------------- LOGO -----------#
-logo='''
-
- ________  _______   ______  ______   ______  
-   _________   _____  .___   _____   
- /   _____/  /  _  \ |   | /     \  
- \_____  \  /  /_\  \|   |/  \ /  \ 
- /        \/    |    \   /    Y    \
-/_______  /\____|__  /___\____|__  /
-        \/         \/            \/   
-                                                   
-                                             
-                                             
-
-'''
-#--------------- CLEAR FUNCTION -------------#
-def clear():
-    c('clear')
-    print(logo)
-    print(40*'-')
-    print(' FB PAGE : 𝙎̮̮̮̑̑̑̑𝘼̮̮̮̑̑̑̑𝙄̮̮̮̑̑̑̑𝙈̮̮̮̑̑̑̑ 𝘽̮̮̮̑̑̑̑𝙍̮̮̮̑̑̑̑𝘼̮̮̮̑̑̑̑𝙉̮̮̮̑̑̑̑𝘿̮̮̮̑̑̑̑ ')
-    print(' GITHUB  : SAIM420 ')
-    print(40*'-')
-#----------- MAIN FUNCTION ------------#
-def main():
-    clear()
-    print(' [A] MARSHAL ENCRYPTION ')
-    print(' [B] BASE64  ENCRYPTION ')
-    print(' [C] ZLIB    ENCRYPTION ')
-    print(' [D] CYTHON  EXECUTABLE ')
-    print(' [E] EXIT TERMINAL ')
-    print(40*'-')
-    option=input(' [?] CHOICE MENU : ')
-    if option in ['a','A']:
-        marshal_enc()
-    elif option in ['b','B']:
-        base64_enc()
-    elif option in ['c','C']:
-        zlib_enc()
-    elif option in ['d','D']:
-        cython_executable()
-    else:
-        exit(' TOOL EXITED :/')
-#----------- MARSHAL ENCRYPTION --------------#
-def marshal_enc():
-    clear()
-    file=input(' ENTER SOURCE FILE NAME : ')
-    filex=input(' ENTER OUTPUT FILE NAME : ')
-    try:
-        file_open=open(file,'r').read()
-    except:
-        exit(' FILE NOT FOUND ERROR !!')
-    compilex=compile(file_open,'dg','exec')
-    dump=marshal.dumps(compilex)
-    run_code=f'import marshal \nexec(marshal.loads({dump}))'
-    out_put=open(filex,'w')
-    out_put.write(run_code)
-    out_put.close()
-    print(40*'-')
-    print(' [✓✓] ENCRYPTION COMPLETE :/ ')
-    print(' [✓✓] OUTPUT FILE SAVE AS : '+filex)
-#---------- BASE64 ENCRYPTION ------------#
-def base64_enc():
-    clear()
-    input_file=input(' ENTER SOURCE FILE PATH : ')
-    output_file=input(' ENTER OUTPUT FILE PATH : ')
-    try:
-        file_open=open(input_file,'r').read()
-    except:
-        exit(' FILE NOT FOUND ERROR !!')
-    compile=base64.b64encode(file_open.encode())
-    run_code=f'import base64\nexec(base64.b64decode({compile}))'
-    out_put=open(output_file,'w')
-    out_put.write(run_code)
-    out_put.close()
-    print(' [✓✓] ENCRYPTION COMPLETE :/')
-    print(' [✓✓] ENC FILE SAVE AS : '+output_file)
-#---------------- ZLIB ENCRYPTION -----------------#
-def zlib_enc():
-    clear()
-    src=input(' ENTER SOURCE FILE PATH : ')
-    save_file=input(' ENTER OUTPUT FILE PATH : ')
-    try:
-        src_file=open(src,'r').read()
-    except:
-        exit(' FILE NOT FOUND !!')
-    compile_zlib=zlib.compress(src_file.encode())
-    run_code=f'import zlib\nexec(zlib.decompress({compile_zlib}).decode())'
-    out_put=open(save_file,'w')
-    out_put.write(run_code)
-    out_put.close()
-    print(' [✓✓] ENCRYPTION COMPLETE :/')
-    print(' [✓✓] ENC FILE SAVE AS : '+save_file)
-#--------------- CYTHON EXECUTABLE -----------------#
-def cython_executable():
-    clear()
-    file=input(' ENTER SOURCE FILE PATH : ')
-    try:
-        filex=open(file,'r').read()
-    except:
-        exit(' FILE NOT FOUND ERROR :/')
-    error=filex.replace('	','    ')
-    solve=open(file,'w').write(error)
-    execute(file)
-    clear()
-    print(' [✓✓] CYTHON EXECUTABLE COMPLETE :")')
-    save=file[:-3]
-    print(' [✓✓] EXECUTABLE FILE SAVE AS : '+save)
-#----------------- END --------------#
-main()
+	print R + '\n[' + W + '!' + R + '] ' + W + 'there an error'
+	print R + '[' + W + '!' + R + '] ' + W + 'trying to exit'
+	sys.exit()
+if count < 400:
+	try:
+	    fileopen = open(file).read()
+	except IOError:
+	    banner()
+	    print R + '\n[' + W + '!' + R + '] ' + W + 'file not exist'
+	    sys.exit()
+	try:
+	    a = compress(fileopen)
+	except Exception as f:
+	    banner()
+	    print R + '[' + W + '!' + R + '] ' + W + str(f)
+	    sys.exit()
+	d = ('# Encrypted By xNot_Found\n# Github : https://github.com/hatakecnk/\n# Do Not Edit The Script To Avoid Errors\nimport zlib\nexec(zlib.decompress('+repr(a)+'))')
+	while True:
+		if count >= counter:
+			try:
+				fileopen = d
+			except IOError:
+				banner()
+				print R + '\n[' + W + '!' + R + '] ' + W + 'file not exist'
+				sys.exit()
+			try:
+				a = compress(fileopen)
+			except Exception as f:
+				banner()
+				print R + '[' + W + '!' + R + '] ' + W + f
+				sys.exit()
+			d = ('# Encrypted By xNot_Found\n# Github : https://github.com/hatakecnk/\n# Do Not Edit The Script To Avoid Errors\nimport zlib\nexec(zlib.decompress('+repr(a)+'))')
+			print '\x1b[31;5m%s\x1b[39;1m' % counter
+			e = file.replace('.py', '_enc.py')
+			f = open(e, 'w')
+			f.write(d)
+			f.close()
+			counter += 1
+		else:
+			break
+try:
+	banner()
+	print B + '\n[' + W + '+' + B + '] ' + G + 'file saved : \x1b[39;5m' + e
+except:
+	print R + '\n[' + W + '!' + R + '] ' + W + 'there an error'
+	print R + '[' + W + '!' + R + '] ' + W + 'trying exit'
+	sys.exit()
